@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= session.to_h.inspect %>
+    <%= cookies.to_h.inspect %>
     <%= yield %>
   </body>
 </html>
