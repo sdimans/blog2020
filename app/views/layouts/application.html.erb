@@ -12,12 +12,14 @@
   <body>
     <%= session.to_h.inspect %>
     <%= cookies.to_h.inspect %>
+    <div>
     <% if session[:user_id] %>
       <%= "Здравствуйте, #{User.find(session[:user_id]).name}!" %>
       <%= link_to 'Выйти', destroy_session_path %>
     <% else %>
-      <%= link_to 'Войти', new_session_path %>
+      <%= link_to 'Войти', login_path %>
     <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
