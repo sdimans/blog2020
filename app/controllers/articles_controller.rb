@@ -82,7 +82,7 @@ class ArticlesController < ApplicationController
     end
 
     def check_edit
-      if @article.user != @current_user #&& !@current_user.admin?
+      unless @current_user && (@article.user == @current_user || @current_user.admin?)
         flash[:notice] = 'Доступ запрещён'
         redirect_to @article
       end
