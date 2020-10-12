@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :check_new, only: [:new, :create]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :check_edit, only: [:edit, :update, :destroy]
 
   # GET /articles
   # GET /articles.json
@@ -77,6 +78,13 @@ class ArticlesController < ApplicationController
     def check_new
       if @current_user.nil?
         redirect_to login_path
+      end
+    end
+
+    def check_edit
+      if @article.user != @current_user #&& !@current_user.admin?
+        flash[:notice] = 'Доступ запрещён'
+        redirect_to @article
       end
     end
 end
